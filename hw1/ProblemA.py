@@ -57,8 +57,11 @@ def tda(imgFile,nr,nc,thresholds):
 	#get the counts of numbers over thresholds
 	#tabulating order
 	# horizontal,vertical, NW-SE diag , NE-SW diag
-
-	f = open(imgFile)
+	try:
+		f = open(imgFile)
+	except:
+		print("Error: File not present.")
+		sys.exit()
 	text = f.readline().split()
 	int_list = []
 
