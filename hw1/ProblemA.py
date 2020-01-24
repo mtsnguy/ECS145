@@ -60,14 +60,20 @@ def tda(imgFile,nr,nc,thresholds):
 
 	f = open(imgFile)
 	text = f.readline().split()
-	int_list = [int(i) for i in text]
+	int_list = []
+
+	for i in text: 
+		if int(i) < 0:
+			print("Error: Non-negative number in imgFile.")
+			sys.exit()
+		int_list.append(int(i))
 
 	overall = []
 
 	#Create matrix object 
 	mat = Matrix(int_list,nr,nc)
-	print(mat.X)
 
+	#Get overall count vector for given matrix and thresholds
 	for threshold in thresholds:
 		placehold = []
 		#horizontal
@@ -77,8 +83,7 @@ def tda(imgFile,nr,nc,thresholds):
 		#NW-SE diag
 		placehold.extend(nwsecheck(mat,threshold))
 		#NE-SW diag
-		#placehold.extend(neswcheck(mat,threshold))
-
+		placehold.extend(neswcheck(mat,threshold))
 		overall.append(placehold)
 
 	print(overall)
@@ -118,10 +123,37 @@ def verticalcheck(mat,threshold):
 		vec.append(count)
 	return vec
 
+#  4   15   16   1
+# 17    2   10  18
+# 11   12    9  20
+
+# work on nwse
 def nwsecheck(mat,threshold):
-	pass
+	rows = mat.rows 
+	cols = mat.cols 
+
+	diag = []
+	for x in range(rows + cols - 1):
+		line = []
+		for y in range(x + 1):
+			if(x - y) < rows and y < cols:
+				line.append(mat[x-y][y])
+		diag.append(line)
+	print(diag)
+	return [1,1]
 
 def neswcheck(mat,threshold):
-	pass
+	rows = mat.rows
+	cols = mat.cols
+
+	diag = []
+	for x in range(rows + cols - 1):
+		line = []
+		for y in range(x + 1):
+			if(x - y) < rows and y < cols:
+				line.append(mat[x-y][y])
+		diag.append(line)
+	#print(diag)
+	return [1,1]
 
 tda('sampleimg',3,4,[10,5])
