@@ -31,8 +31,7 @@ class Matrix(object):
     
     @property
     def cols(self):
-        return len(self.X[0])
-    
+        return len(self.X[0]) 
 
     def __getitem__(self, key):
         return self.X[key]
@@ -63,8 +62,66 @@ def tda(imgFile,nr,nc,thresholds):
 	text = f.readline().split()
 	int_list = [int(i) for i in text]
 
+	overall = []
+
 	#Create matrix object 
 	mat = Matrix(int_list,nr,nc)
 	print(mat.X)
 
-tda('sampleimg',3,4,10)
+	for threshold in thresholds:
+		placehold = []
+		#horizontal
+		placehold.extend(horizontalcheck(mat,threshold))
+		#vertical
+		placehold.extend(verticalcheck(mat,threshold))
+		#NW-SE diag
+		placehold.extend(nwsecheck(mat,threshold))
+		#NE-SW diag
+		#placehold.extend(neswcheck(mat,threshold))
+
+		overall.append(placehold)
+
+	print(overall)
+
+
+def horizontalcheck(mat,threshold):
+	vec = []
+	memo = []
+	for i in mat:
+		count = 0
+		for j in i:
+			if j < threshold and memo:
+				memo = []
+				count += 1
+			if j >= threshold: 
+				memo.append(j)
+		if memo: 
+			memo = []
+			count += 1
+		vec.append(count)
+	return vec
+
+def verticalcheck(mat,threshold):
+	vec = []
+	memo = []
+	for index, i in enumerate(mat[0]):
+		count = 0
+		for j in mat:
+			if j[index] < threshold and memo:
+				memo = []
+				count += 1
+			if j[index] >= threshold: 
+				memo.append(j[index])
+		if memo: 
+			memo = []
+			count += 1
+		vec.append(count)
+	return vec
+
+def nwsecheck(mat,threshold):
+	pass
+
+def neswcheck(mat,threshold):
+	pass
+
+tda('sampleimg',3,4,[10,5])
