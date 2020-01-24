@@ -64,14 +64,13 @@ def tda(imgFile,nr,nc,thresholds):
 		sys.exit()
 	text = f.readline().split()
 	int_list = []
-
+	overall = []
+	#error checking for negative number
 	for i in text: 
 		if int(i) < 0:
 			print("Error: Non-negative number in imgFile.")
 			sys.exit()
 		int_list.append(int(i))
-
-	overall = []
 
 	#Create matrix object 
 	mat = Matrix(int_list,nr,nc)
@@ -89,7 +88,7 @@ def tda(imgFile,nr,nc,thresholds):
 		placehold.extend(neswcheck(mat,threshold))
 		overall.append(placehold)
 
-	print(overall)
+	return overall
 
 
 def horizontalcheck(mat,threshold):
@@ -132,19 +131,10 @@ def verticalcheck(mat,threshold):
 
 # work on nwse
 def nwsecheck(mat,threshold):
-	rows = mat.rows 
-	cols = mat.cols 
 
-	diag = []
-	for x in range(rows + cols - 1):
-		line = []
-		for y in range(x + 1):
-			if(x - y) < rows and y < cols:
-				line.append(mat[x-y][y])
-		diag.append(line)
-	print(diag)
 	return [1,1]
 
+#nesw complete
 def neswcheck(mat,threshold):
 	rows = mat.rows
 	cols = mat.cols
@@ -156,7 +146,23 @@ def neswcheck(mat,threshold):
 			if(x - y) < rows and y < cols:
 				line.append(mat[x-y][y])
 		diag.append(line)
-	#print(diag)
-	return [1,1]
+	
+	#Once list of diagonals is formed, then find counts over threshold
+	vec = []
+	memo =[]
+	for i in diag:
+		count = 0
+		for j in i:
+			if j < threshold and memo:
+				memo = []
+				count += 1
+			if j >= threshold: 
+				memo.append(j)
+		if memo: 
+			memo = []
+			count += 1
+		vec.append(count)
+	return vec
 
-tda('sampleimg',3,4,[10,5])
+#for testing
+print(tda('sampleimg',3,4,[10,5]))
