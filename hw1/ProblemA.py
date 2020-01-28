@@ -77,17 +77,14 @@ def tda(imgFile,nr,nc,thresholds):
 
 	#Get overall count vector for given matrix and thresholds
 	for threshold in thresholds:
-		placehold = []
 		#horizontal
-		placehold.extend(horizontalcheck(mat,threshold))
+		overall.extend(horizontalcheck(mat,threshold))
 		#vertical
-		placehold.extend(verticalcheck(mat,threshold))
+		overall.extend(verticalcheck(mat,threshold))
 		#NW-SE diag
-		placehold.extend(nwsecheck(mat,threshold))
+		overall.extend(nwsecheck(mat,threshold))
 		#NE-SW diag
-		placehold.extend(neswcheck(mat,threshold))
-		overall.append(placehold)
-
+		overall.extend(neswcheck(mat,threshold))
 	return overall
 
 
@@ -175,8 +172,8 @@ def nwsecheck(mat,threshold):
             if (x + y) < rows and y < cols:
                 if (x >= 0) or ((x < 0) and y >= -x):
                     line.append(mat[x+y][y])
-        diag.append(line)
-        x -= 1
+		diag.append(line)
+		x -= 1
 	#Once list of diagonals is formed, then find counts over threshold
 	vec = []
 	memo =[]
