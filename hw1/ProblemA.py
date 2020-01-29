@@ -1,3 +1,4 @@
+
 import sys
 
 class Matrix(object):
@@ -40,19 +41,6 @@ class Matrix(object):
         assert self.cols == len(value)
         self.X[key] = value
 
-    def __delitem__(self, key):
-        """
-        Delete a row of the matrix
-        """
-        del self.X[key]
-
-    def del_column(self, key):
-        """
-        Delete a specified column
-        """
-        for i in range(0,self.rows):
-            del self.X[i][key]
-
 def tda(imgFile,nr,nc,thresholds):
 	#get the counts of numbers over thresholds
 	#tabulating order
@@ -85,6 +73,8 @@ def tda(imgFile,nr,nc,thresholds):
 		overall.extend(nwsecheck(mat,threshold))
 		#NE-SW diag
 		overall.extend(neswcheck(mat,threshold))
+
+
 	return overall
 
 
@@ -121,15 +111,6 @@ def verticalcheck(mat,threshold):
 			count += 1
 		vec.append(count)
 	return vec
-
-#  4   15   16   1
-# 17    2   10  18
-# 11   12    9  20
-
-# work on nwse
-def nwsecheck(mat,threshold):
-
-	return [1,1]
 
 #nesw complete
 def neswcheck(mat,threshold):
@@ -192,4 +173,4 @@ def nwsecheck(mat,threshold):
     return vec
 
 #for testing
-print(tda('sampleimg',3,4,[10,5]))
+#print(tda('sampleimg',3,4,[10,5]))
