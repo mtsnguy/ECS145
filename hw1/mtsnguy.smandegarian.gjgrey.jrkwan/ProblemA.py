@@ -152,25 +152,25 @@ def nwsecheck(mat,threshold):
         for y in range(rows + cols + 1):
             if (x + y) < rows and y < cols:
                 if (x >= 0) or ((x < 0) and y >= -x):
-                    line.append(mat[x+y][y])
+                	line.append(mat[x+y][y])
         diag.append(line)
         x -= 1
-	#Once list of diagonals is formed, then find counts over threshold
-	vec = []
-	memo =[]
-	for i in diag:
-		count = 0
-		for j in i:
-			if j < threshold and memo:
-				memo = []
-				count += 1
-			if j >= threshold:
-				memo.append(j)
-		if memo:
-			memo = []
-			count += 1
-		vec.append(count)
+#Once list of diagonals is formed, then find counts over threshold
+    vec = []
+    memo =[]
+    for i in diag:
+        count = 0
+        for j in i:
+        	if j < threshold and memo:
+        		memo = []
+        		count += 1
+        		if j >= threshold:
+        			memo.append(j)
+        if memo:
+        	memo = []
+        	count += 1
+        vec.append(count)
     return vec
 
 #for testing
-print(tda('sampleimg',3,4,[10,5]))
+#print(tda('sampleimg',3,4,[10,5]))
