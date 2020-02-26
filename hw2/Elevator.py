@@ -34,7 +34,6 @@ class elevatorClass(Process):
         self.fullTrips = 0.0
     def Run(self):
         while True:
-            self.numTrips += 1
             #Get the first X people in the list, go to sleep if nobody there
             passengers = G.passProc.arrvs[:self.maxPassengers]
             if len(G.passProc.arrvs) == 0:
@@ -46,6 +45,7 @@ class elevatorClass(Process):
             #Remove the first X people from the list
             G.passProc.arrvs = G.passProc.arrvs[self.maxPassengers:]
 
+            self.numTrips += 1
             #If there are passengers left over
             if len(G.passProc.arrvs) > 0:
                 self.fullTrips += 1
