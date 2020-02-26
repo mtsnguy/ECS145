@@ -8,18 +8,16 @@ class G:  # globals
     passProc = None  # passenger process
 
 class passClass(Process):
-    numPassengers = 1
     def __init__(self):
         Process.__init__(self)
         self.passArrvRate = float(sys.argv[1])
         # self.arrvs will be arrivals waiting for pickup
         self.arrvs = [0.0]
         self.nextArrv = None  # for debugging/code verifying
-        self.startTime = now()
     def Run(self):
         while True:
             yield hold, self, G.Rnd.expovariate(self.passArrvRate)
-            self.arrvs.append(now() - self.startTime)
+            self.arrvs.append(now())
             if G.elevProc.asleep == True:
                 reactivate(G.elevProc)
 
@@ -50,7 +48,7 @@ class elevatorClass(Process):
             if len(G.passProc.arrvs) > 0:
                 self.fullTrips += 1
             
-            passengers = map(lambda u: (now() - G.passProc.startTime) - u, passengers)
+            passengers = map(lambda u: now() - u, passengers)
             self.waitTimes.extend(passengers)
 
             #Wait for the elevator to arrive again
