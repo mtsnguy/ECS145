@@ -57,17 +57,32 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   }
 }
 
+uservector <- function(){
+  x <- 0
+  myvec = vector()
+  while(x<5){
+    n <- readline(prompt = "Input a tuning parameter(type 'quit' to end): ")
+    if(n != 'quit'){
+      myvec = c(myvec,n)
+      x<- x+1
+    }else{
+      return (as.integer(myvec))
+    }
+  }
+  return (as.integer(myvec))
+}
+
 print("Welcome to the Term Project.")
 while(1){
   #code will repeatedly loop here to get user input for 4 choices
 
-  #estMethod<-readline(prompt="Enter hist or density")
-  #tuning<-readline(prompt="Enter your initial tuning parameter.")
-  #twoAtATime<-readline(prompt="Superimpose graphs onto previous ones? (T or F)")
+  estMethod<-readline(prompt="Enter hist or density: ")
+  tuning<-as.integer(readline(prompt="Enter your initial tuning parameter: "))
+  twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
   #exploreShape(Nile,estMethod,tuning,twoAtATime)
   while(choicefour){
-    exploreShape(Nile,'hist','',F) #testing purpose
-    #exploreShape(Nile,estMethod,tuning,twoAtATime)
+    #exploreShape(Nile,'hist','',F) #testing purpose
+    exploreShape(Nile,estMethod,tuning,twot)
     print("Please select one of the four options.")
     print("1. Give a new value of the tuning parameter.")
     print("2 Zoom in/out.")
@@ -86,17 +101,16 @@ while(1){
       print("Quit")
       break
     }
-    break
   }
-  break
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
-  while(choicetune){
-    
-  }
+  userparam = uservector()
+  
+  break
   #loop again so user can select print,summary or plot or exit
   #end program or start again
   while(choicepspe){
     
   }
 }
+
