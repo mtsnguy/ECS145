@@ -128,14 +128,14 @@ while(1){
       #animation
       animate(dataset,estMethod)
     }else if(selectOption == 4){
-      cat("Quit")
+      cat("Quit\n")
       break
     }
   }
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
   #returns a vector of integers
-  cat('Save your tuning parameters!')
+  cat('Save your tuning parameters!\n')
   userparam = uservector()
   
   break
