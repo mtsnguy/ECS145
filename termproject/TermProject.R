@@ -3,16 +3,6 @@
 #estMethod: Either 'hist' or 'density'.
 #tuning: The intial value of either breaks or bw.
 #twoAtATime: If TRUE, always display the current graph superimposed on the previous one, to aid comparison.
-  s <- list(name = "Joe", salary = 5000, union = T)
-  class(s) <- "densEst"
-  
-  print.densEst <- function(x){
-    cat(x$name,"\n")
-    cat("salary",x$salary,"\n")
-    cat("union member",x$union,"\n")
-  }
-s
-
 choicefour <- T
 choicetune <- T
 choicepspe <- T
