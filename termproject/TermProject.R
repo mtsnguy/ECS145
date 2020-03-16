@@ -55,11 +55,6 @@ plot.densEst <- function(x){
     }
   }
 }
-#for testing the s3 object function
-#test <- exploreS3(ogdata,'hist',gu,T)
-#plot(test)
-
-
 
 uservector <- function(){
   x <- 0
@@ -181,10 +176,5 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   userparam = uservector()
   
   #Create the s3 object that we'll use in the next part
-  s3obj <- exploreS3(ogdata,estMethod,userparam,twot)
-  
-  #loop again so user can select cat,summary or plot or exit
-  #give option to end program or start again
-  while(choicepspe){
-    break
-  }
+  s3obj <- exploreS3(ogdata,estMethod,userparam,twot) 
+  return(s3obj)
