@@ -6,7 +6,7 @@
 choicefour <- T
 choicetune <- T
 choicepspe <- T
-gmemory <- 1
+gmemory <- -1
 
 #for zoom out
 ogdata <- Nile
@@ -28,7 +28,9 @@ plot.densEst <- function(x){
     if(x$method == 'hist'){
       if(x$two){
         plot(hist(x$data,breaks=tune))
-        lines(hist(x$data,breaks=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(hist(x$data,breaks=gmemory),col = "red")
+        }
         gmemory <<- tune
       }else{
         plot(hist(x,breaks=tuning))
@@ -38,7 +40,9 @@ plot.densEst <- function(x){
     }else if(x$method == 'density'){
       if(x$two){
         plot(density(x$data,bw=tune))
-        lines(density(x$data,bw=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(density(x$data,bw=gmemory),col = "red")
+        }
         gmemory <<- tune
       }else{
         plot(density(x$data,bw=tune))
@@ -60,10 +64,14 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
     if(twoAtATime){
       if(tuning == ''){
         plot(hist(x))
-        lines(hist(x,breaks=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(hist(x,breaks=gmemory),col = "red")
+        }
       }else{
         plot(hist(x,breaks=tuning))
-        lines(hist(x,breaks=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(hist(x,breaks=gmemory),col = "red")
+        }
         gmemory <<- tuning
       }
     }else{
@@ -78,10 +86,14 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
     if(twoAtATime){
       if(tuning == ''){
         plot(density(x))
-        lines(density(x,bw=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
       }else{
         plot(density(x,bw=tuning))
-        lines(density(x,bw=gmemory),col = "red")
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
         gmemory <<- tuning
       }
     }else{
