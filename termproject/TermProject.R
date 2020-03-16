@@ -135,7 +135,7 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
       gmemory <<- tuning
     }
   }else{
-    print('Error: Was not given a valid Method name.\n')
+    cat('Error: Was not given a valid Method name.\n')
     return(0)
   }
 }
@@ -144,11 +144,11 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   newShape(x, estMethod, tuning, twoAtATime)
   while(choicefour){
     newShape(x,estMethod,tuning,twoAtATime)
-    print("Please select one of the four options.\n")
-    print("1. Give a new value of the tuning parameter.\n")
-    print("2. Zoom in/out.\n")
-    print("3. Run an animation of tuning parameters.\n")
-    print("4. Quit.\n")
+    cat("Please select one of the four options.\n")
+    cat("1. Give a new value of the tuning parameter.\n")
+    cat("2. Zoom in/out.\n")
+    cat("3. Run an animation of tuning parameters.\n")
+    cat("4. Quit.\n")
     selectOption <- readline(prompt="Enter a number and press Enter: ")
     if(selectOption == 1){
       tuning <- as.integer(readline(prompt = "Enter a new value of the tuning parameter:"))
@@ -157,27 +157,27 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
       if(zoom == 'in'){
         zoomparam <- 10
         if(length(dataset) < zoomparam){
-          print("You can't zoom in anymore.\n")
+          cat("You can't zoom in anymore.\n")
         }else{
-          print("Zooming in...\n")
+          cat("Zooming in...\n")
           dataset = dataset[zoomparam:(length(dataset)-zoomparam)]
         }
       }else if(zoom == 'out'){
-        print("Zooming out...\n")
+        cat("Zooming out...\n")
         dataset = ogdata
       }
     }else if(selectOption == 3){
       #animation
       animate(dataset,estMethod)
     }else if(selectOption == 4){
-      print("Quit\n")
+      cat("Quit\n")
       break
     }
   }
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
   #returns a vector of integers
-  print('Save some of your tuning parameters!(5 max)\n')
+  cat('Save some of your tuning parameters!(5 max)\n')
   userparam = uservector()
   
   #Create the s3 object that we'll use in the next part
@@ -188,4 +188,3 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   while(choicepspe){
     break
   }
-}
