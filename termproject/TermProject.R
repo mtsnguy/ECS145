@@ -55,7 +55,7 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
       gmemory = tuning
     }
   }else{
-    cat('Error: Was not given a valid Method name.')
+    cat('Error: Was not given a valid Method name.\n')
     return(0)
   }
 }
@@ -75,7 +75,7 @@ uservector <- function(){
   return (as.integer(myvec))
 }
 
-cat("Welcome to the Term Project.")
+cat("Welcome to the Term Project.\n")
 while(1){
   #code will repeatedly loop here to get user input for 4 choices
 
@@ -86,26 +86,26 @@ while(1){
   while(choicefour){
     #exploreShape(Nile,'hist','',F) #testing purpose
     exploreShape(dataset,estMethod,tuning,twot)
-    cat("Please select one of the four options.")
-    cat("1. Give a new value of the tuning parameter.")
-    cat("2 Zoom in/out.")
-    cat("3. Run an animation of tuning parameters.")
-    cat("4. Quit.")
+    cat("Please select one of the four options.\n")
+    cat("1. Give a new value of the tuning parameter.\n")
+    cat("2. Zoom in/out.\n")
+    cat("3. Run an animation of tuning parameters.\n")
+    cat("4. Quit.\n")
     selectOption <- readline(prompt="Enter a number and press Enter: ")
     if(selectOption == 1){
       tuning <- as.integer(readline(prompt = "Enter a new value of the tuning parameter:"))
     }else if(selectOption == 2){
       zoom <- readline(prompt = "Zoom in or Zoom out? ('in' , 'out'):")
       if(zoom == 'in'){
-        zoomparam <- 15
-        if(length(dataset) < 15){
-          cat("You can't zoom in anymore.")
+        zoomparam <- 10
+        if(length(dataset) < zoomparam){
+          cat("You can't zoom in anymore.\n")
         }else{
-          cat("Zooming in...")
-          dataset = dataset[15:(length(dataset)-15)]
+          cat("Zooming in...\n")
+          dataset = dataset[zoomparam:(length(dataset)-zoomparam)]
         }
       }else if(zoom == 'out'){
-        cat("Zooming out...")
+        cat("Zooming out...\n")
         dataset = ogdata
       }
     }else if(selectOption == 3){
