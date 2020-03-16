@@ -178,3 +178,4 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   #Create the s3 object that we'll use in the next part
   s3obj <- exploreS3(ogdata,estMethod,userparam,twot) 
   return(s3obj)
+}
