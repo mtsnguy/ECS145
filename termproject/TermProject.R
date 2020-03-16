@@ -27,9 +27,11 @@ plot.densEst <- function(x){
   for (tune in x$tuning){
     if(x$method == 'hist'){
       if(x$two){
-        plot(hist(x$data,breaks=tune))
+        p1 <- hist(x$data,breaks=tune,plot=FALSE)
+        plot(p1, col="blue", angle = 135,density=10)
         if (gmemory >= 0) {
-          lines(hist(x$data,breaks=gmemory),col = "red")
+          p2 <- hist(x$data,breaks=gmemory,plot=FALSE)
+          plot(p2, col="red", add=T, angle = 45,density=10)
         }
         gmemory <<- tune
       }else{
@@ -92,22 +94,28 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
   if(estMethod == 'hist'){
     if(twoAtATime){
       if(tuning == ''){
-        hist(x)
+        p1 <- hist(x,plot=FALSE)
+        plot(p1, col="blue", angle = 135,density=10)
         if (gmemory >= 0) {
-          hist(x,breaks=gmemory,col = "red",add=T)
+          p2 <- hist(x,breaks=gmemory,plot=FALSE)
+          plot(p2, col="red", add=T, angle = 45, density=10)
         }
       }else{
-        plot(hist(x,breaks=tuning))
+        p1 <- hist(x,breaks=tuning,plot=FALSE)
+        plot(p1, col="blue", angle = 135,density=10)
         if (gmemory >= 0) {
-          hist(x,breaks=gmemory,col = "red", add=T)
+          p2 <- hist(x,breaks=gmemory,plot=FALSE)
+          plot(p2, add=T, col="red", angle=45,density=10)
         }
         gmemory <<- tuning
       }
     }else{
       if(tuning == ''){
-        hist(x)
+        p1 <- hist(x,breaks=tuning,plot=FALSE)
+        plot(p1, col="blue", angle = 135,density=10)
       }else{
-        hist(x,breaks=tuning)
+        p1 <- hist(x,breaks=tuning,plot=FALSE)
+        plot(p1, col="blue", angle = 135,density=10)
         gmemory <<- tuning
       }
     }
