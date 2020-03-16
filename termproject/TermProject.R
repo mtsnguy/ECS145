@@ -52,8 +52,8 @@ plot.densEst <- function(x){
   }
 }
 #for testing the s3 object function
-test <- exploreS3(ogdata,'hist',gu,T)
-plot(test)
+#test <- exploreS3(ogdata,'hist',gu,T)
+#plot(test)
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
   if(estMethod == 'hist'){
@@ -128,9 +128,27 @@ cat("Welcome to the Term Project.\n")
 while(1){
   #code will repeatedly loop here to get user input for 4 choices
   estMethod<-readline(prompt="Enter hist or density: ")
+  while (estMethod != "hist" & estMethod != "density") {
+    estMethod<-readline(prompt="Please enter ONLY hist or density: ")
+  }
   #print the default values for bw and break
   tuning<-as.integer(readline(prompt="Enter your initial tuning parameter: "))
+  checkNumeric <- function(x) {
+    is.numeric(x) & !is.na(x)
+  }
+  while (!checkNumeric(tuning)) {
+    tuning<-as.integer(readline(prompt="Enter your initial NUMERICAL tuning parameter: "))
+  }
   twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
+  while (twot != "t" & twot != "f" & twot != "T" & twot != "F") {
+    twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
+  }
+  if (twot == "t") {
+    twot <- T
+  }
+  if (twot == "f") {
+    twot <- F
+  }
   #exploreShape(Nile,estMethod,tuning,twoAtATime)
   while(choicefour){
     #exploreShape(Nile,'hist','',F) #testing purpose
