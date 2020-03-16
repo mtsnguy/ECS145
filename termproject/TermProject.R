@@ -22,7 +22,7 @@ exploreS3 <- function(x,estMethod,tuningparams,twoAtATime){
 print.densEst <- function(x){
   cat("Method: ", x$method,"\n")
   cat("Tuning parameters: ", x$tuning,"\n")
-  cat("Superimpose plots: ", x$twoAtATime,"\n")
+  cat("Superimpose plots: ", x$two,"\n")
 }
 summary.densEst <- function(x){
   summary(x$data)
