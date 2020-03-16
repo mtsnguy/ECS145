@@ -63,22 +63,22 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   if(estMethod == 'hist'){
     if(twoAtATime){
       if(tuning == ''){
-        plot(hist(x))
+        hist(x)
         if (gmemory >= 0) {
-          lines(hist(x,breaks=gmemory),col = "red")
+          hist(x,breaks=gmemory,col = "red",add=T)
         }
       }else{
         plot(hist(x,breaks=tuning))
         if (gmemory >= 0) {
-          lines(hist(x,breaks=gmemory),col = "red")
+          hist(x,breaks=gmemory,col = "red", add=T)
         }
         gmemory <<- tuning
       }
     }else{
       if(tuning == ''){
-        plot(hist(x))
+        hist(x)
       }else{
-        plot(hist(x,breaks=tuning))
+        hist(x,breaks=tuning)
         gmemory <<- tuning
       }
     }
