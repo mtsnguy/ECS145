@@ -3,56 +3,59 @@
 #estMethod: Either 'hist' or 'density'.
 #tuning: The intial value of either breaks or bw.
 #twoAtATime: If TRUE, always display the current graph superimposed on the previous one, to aid comparison.
-s <- list(name = "Joe", salary = 5000, union = T)
-class(s) <- "densEst"
-
-print.densEst <- function(x){
-  cat(x$name,"\n")
-  cat("salary",x$salary,"\n")
-  cat("union member",x$union,"\n")
-}
+  s <- list(name = "Joe", salary = 5000, union = T)
+  class(s) <- "densEst"
+  
+  print.densEst <- function(x){
+    cat(x$name,"\n")
+    cat("salary",x$salary,"\n")
+    cat("union member",x$union,"\n")
+  }
 s
 
 choicefour <- T
 choicetune <- T
 choicepspe <- T
 gmemory <- 1
+#for zoom out
+ogdata <- Nile
+dataset <- Nile
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
   if(estMethod == 'hist'){
     if(twoAtATime){
       if(tuning == ''){
-        plot(hist(Nile))
-        lines(hist(Nile,breaks=gmemory),col = "red")
+        plot(hist(x))
+        lines(hist(x,breaks=gmemory),col = "red")
       }else{
-        plot(hist(Nile,breaks=tuning))
-        lines(hist(Nile,breaks=gmemory),col = "red")
+        plot(hist(x,breaks=tuning))
+        lines(hist(x,breaks=gmemory),col = "red")
         gmemory = tuning
       }
     }else{
       if(tuning == ''){
-        plot(hist(Nile))
+        plot(hist(x))
       }else{
-        plot(hist(Nile,breaks=tuning))
+        plot(hist(x,breaks=tuning))
         gmemory = tuning
       }
     }
   }else if(estMethod == 'density'){
     if(twoAtATime){
       if(tuning == ''){
-        plot(density(Nile))
-        lines(density(Nile,bw=gmemory),col = "red")
+        plot(density(x))
+        lines(density(x,bw=gmemory),col = "red")
       }else{
-        plot(density(Nile,bw=tuning))
-        lines(density(Nile,bw=gmemory),col = "red")
+        plot(density(x,bw=tuning))
+        lines(density(x,bw=gmemory),col = "red")
         gmemory = tuning
       }
     }else{
-      plot(density(Nile,bw=tuning))
+      plot(density(x,bw=tuning))
       gmemory = tuning
     }
   }else{
-    print('Error: Was not given a valid Method name.')
+    cat('Error: Was not given a valid Method name.')
     return(0)
   }
 }
@@ -72,7 +75,7 @@ uservector <- function(){
   return (as.integer(myvec))
 }
 
-print("Welcome to the Term Project.")
+cat("Welcome to the Term Project.")
 while(1){
   #code will repeatedly loop here to get user input for 4 choices
 
@@ -82,32 +85,44 @@ while(1){
   #exploreShape(Nile,estMethod,tuning,twoAtATime)
   while(choicefour){
     #exploreShape(Nile,'hist','',F) #testing purpose
-    exploreShape(Nile,estMethod,tuning,twot)
-    print("Please select one of the four options.")
-    print("1. Give a new value of the tuning parameter.")
-    print("2 Zoom in/out.")
-    print("3. Run an animation of tuning parameters.")
-    print("4. Quit.")
+    exploreShape(dataset,estMethod,tuning,twot)
+    cat("Please select one of the four options.")
+    cat("1. Give a new value of the tuning parameter.")
+    cat("2 Zoom in/out.")
+    cat("3. Run an animation of tuning parameters.")
+    cat("4. Quit.")
     selectOption <- readline(prompt="Enter a number and press Enter: ")
     if(selectOption == 1){
-      tuning <- readline(prompt = "Enter a new value of the tuning parameter:")
+      tuning <- as.integer(readline(prompt = "Enter a new value of the tuning parameter:"))
     }else if(selectOption == 2){
       zoom <- readline(prompt = "Zoom in or Zoom out? ('in' , 'out'):")
-      #redo the graph over a narrower range of values of x
-      #zoom in = reduce the size of x. zoom out = return original value of x
+      if(zoom == 'in'){
+        zoomparam <- 15
+        if(length(dataset) < 15){
+          cat("You can't zoom in anymore.")
+        }else{
+          cat("Zooming in...")
+          dataset = dataset[15:(length(dataset)-15)]
+        }
+      }else if(zoom == 'out'){
+        cat("Zooming out...")
+        dataset = ogdata
+      }
     }else if(selectOption == 3){
       
     }else if(selectOption == 4){
-      print("Quit")
+      cat("Quit")
       break
     }
   }
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
+  #returns a vector of integers
+  cat('Save your tuning parameters!')
   userparam = uservector()
   
   break
-  #loop again so user can select print,summary or plot or exit
+  #loop again so user can select cat,summary or plot or exit
   #end program or start again
   while(choicepspe){
     

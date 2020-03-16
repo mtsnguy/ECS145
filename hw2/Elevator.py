@@ -45,7 +45,7 @@ class elevatorClass(Process):
             #If there are passengers left over
             if len(G.passProc.arrvs) > 0:
                 self.fullTrips += 1
-            
+            print(passengers)
             passengers = map(lambda u: now() - u, passengers)
             self.waitTimes.extend(passengers)
 
