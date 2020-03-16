@@ -51,6 +51,7 @@ plot.densEst <- function(x){
     }
   }
 }
+#for testing the s3 object function
 test <- exploreS3(ogdata,'hist',gu,T)
 plot(test)
 
