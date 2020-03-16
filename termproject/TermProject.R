@@ -148,8 +148,10 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
 }
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
+  dataset <<- sort(x)
+  ogdata <<- sort(x)
   while(choicefour){
-    newShape(x,estMethod,tuning,twoAtATime)
+    newShape(dataset,estMethod,tuning,twoAtATime)
     cat("Please select one of the four options.\n")
     cat("1. Give a new value of the tuning parameter.\n")
     cat("2. Zoom in/out.\n")
@@ -166,11 +168,11 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
           cat("You can't zoom in anymore.\n")
         }else{
           cat("Zooming in...\n")
-          dataset = dataset[zoomparam:(length(dataset)-zoomparam)]
+          dataset <<- dataset[zoomparam:(length(dataset)-zoomparam)]
         }
       }else if(zoom == 'out'){
         cat("Zooming out...\n")
-        dataset = ogdata
+        dataset <<- ogdata
       }
     }else if(selectOption == 3){
       #animation
