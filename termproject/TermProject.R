@@ -136,7 +136,6 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
 }
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
-  newShape(x, estMethod, tuning, twoAtATime)
   while(choicefour){
     newShape(x,estMethod,tuning,twoAtATime)
     cat("Please select one of the four options.\n")
