@@ -20,9 +20,9 @@ exploreS3 <- function(x,estMethod,tuningparams,twoAtATime){
   return (s)
 }
 print.densEst <- function(x){
-  cat("Method: ", x$method,"\n")
-  cat("Tuning parameters: ", x$tuning,"\n")
-  cat("Superimpose plots: ", x$two,"\n")
+  cat("Method:", x$method,"\n")
+  cat("Tuning parameters:", x$tuning,"\n")
+  cat("Superimpose plots:", x$two,"\n")
 }
 summary.densEst <- function(x){
   summary(x$data)
@@ -65,7 +65,7 @@ plot.densEst <- function(x){
 uservector <- function(){
   x <- 0
   myvec = vector()
-  while(x<5){
+  while(1){
     n <- readline(prompt = "Input a tuning parameter(type 'quit' to end): ")
     if(n != 'quit'){
       myvec = c(myvec,n)
@@ -185,7 +185,7 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
   #returns a vector of integers
-  cat('Save some of your tuning parameters!(5 max)\n')
+  cat('Save some of your tuning parameters!\n')
   userparam = uservector()
   
   #Create the s3 object that we'll use in the next part
