@@ -13,6 +13,7 @@
   }
 s
 
+library(animate)
 choicefour <- T
 choicetune <- T
 choicepspe <- T
@@ -75,11 +76,26 @@ uservector <- function(){
   return (as.integer(myvec))
 }
 
+animate <- function(x,estMethod){
+  ki <- 1
+  while(1){
+    if(estMethod == 'hist'){
+      hist(x,breaks=ki)
+    }else if(estMethod == 'density'){
+      plot(density(x,bw=ki))
+    }
+    ki <- ki + 2
+    Sys.sleep(0.1)
+    if(ki >= 100){
+      break
+    }
+  }
+}
 cat("Welcome to the Term Project.\n")
 while(1){
   #code will repeatedly loop here to get user input for 4 choices
-
   estMethod<-readline(prompt="Enter hist or density: ")
+  #print the default values for bw and break
   tuning<-as.integer(readline(prompt="Enter your initial tuning parameter: "))
   twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
   #exploreShape(Nile,estMethod,tuning,twoAtATime)
@@ -109,7 +125,8 @@ while(1){
         dataset = ogdata
       }
     }else if(selectOption == 3){
-      
+      #animation
+      animate(dataset,estMethod)
     }else if(selectOption == 4){
       cat("Quit")
       break
