@@ -148,8 +148,8 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
 }
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
-  dataset <<- sort(x)
-  ogdata <<- sort(x)
+  dataset <<- sort(x, decreasing=FALSE)
+  ogdata <<- sort(x, decreasing=FALSE)
   while(choicefour){
     newShape(dataset,estMethod,tuning,twoAtATime)
     cat("Please select one of the four options.\n")
