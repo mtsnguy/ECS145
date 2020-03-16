@@ -27,11 +27,9 @@ plot.densEst <- function(x){
   for (tune in x$tuning){
     if(x$method == 'hist'){
       if(x$two){
-        p1 <- hist(x$data,breaks=tune,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10)
+        plot(hist(x$data,breaks=tune))
         if (gmemory >= 0) {
-          p2 <- hist(x$data,breaks=gmemory,plot=FALSE)
-          plot(p2, col="red", add=T, angle = 45,density=10)
+          lines(hist(x$data,breaks=gmemory),col = "red")
         }
         gmemory <<- tune
       }else{
@@ -61,56 +59,7 @@ plot.densEst <- function(x){
 #test <- exploreS3(ogdata,'hist',gu,T)
 #plot(test)
 
-exploreShape <- function(x,estMethod,tuning,twoAtATime){
-  if(estMethod == 'hist'){
-    if(twoAtATime){
-      if(tuning == ''){
-        p1 <- hist(x,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10)
-        if (gmemory >= 0) {
-          p2 <- hist(x,breaks=gmemory,plot=FALSE)
-          plot(p2, col="red", add=T, angle = 45, density=10)
-        }
-      }else{
-        p1 <- hist(x,breaks=tuning,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10)
-        if (gmemory >= 0) {
-          p2 <- hist(x,breaks=gmemory,plot=FALSE)
-          plot(p2, add=T, col="red", angle=45,density=10)
-        }
-        gmemory <<- tuning
-      }
-    }else{
-      if(tuning == ''){
-        hist(x)
-      }else{
-        hist(x,breaks=tuning)
-        gmemory <<- tuning
-      }
-    }
-  }else if(estMethod == 'density'){
-    if(twoAtATime){
-      if(tuning == ''){
-        plot(density(x))
-        if (gmemory >= 0) {
-          lines(density(x,bw=gmemory),col = "red")
-        }
-      }else{
-        plot(density(x,bw=tuning))
-        if (gmemory >= 0) {
-          lines(density(x,bw=gmemory),col = "red")
-        }
-        gmemory <<- tuning
-      }
-    }else{
-      plot(density(x,bw=tuning))
-      gmemory <<- tuning
-    }
-  }else{
-    cat('Error: Was not given a valid Method name.\n')
-    return(0)
-  }
-}
+
 
 uservector <- function(){
   x <- 0
@@ -142,40 +91,109 @@ animate <- function(x,estMethod){
     }
   }
 }
-cat("Welcome to the Term Project.\n")
-while(1){
-  #code will repeatedly loop here to get user input for 4 choices
-  estMethod<-readline(prompt="Enter hist or density: ")
-  while (estMethod != "hist" & estMethod != "density") {
-    estMethod<-readline(prompt="Please enter ONLY hist or density: ")
+
+newShape <- function(x,estMethod,tuning,twoAtATime){
+  
+  if(estMethod == 'hist'){
+    if(twoAtATime){
+      if(tuning == ''){
+        hist(x)
+        if (gmemory >= 0) {
+          hist(x,breaks=gmemory,col = "red",add=T)
+        }
+      }else{
+        plot(hist(x,breaks=tuning))
+        if (gmemory >= 0) {
+          hist(x,breaks=gmemory,col = "red", add=T)
+        }
+        gmemory <<- tuning
+      }
+    }else{
+      if(tuning == ''){
+        hist(x)
+      }else{
+        hist(x,breaks=tuning)
+        gmemory <<- tuning
+      }
+    }
+  }else if(estMethod == 'density'){
+    if(twoAtATime){
+      if(tuning == ''){
+        plot(density(x))
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
+      }else{
+        plot(density(x,bw=tuning))
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
+        gmemory <<- tuning
+      }
+    }else{
+      plot(density(x,bw=tuning))
+      gmemory <<- tuning
+    }
+  }else{
+    print('Error: Was not given a valid Method name.\n')
+    return(0)
   }
-  #print the default values for bw and break
-  tuning<-as.integer(readline(prompt="Enter your initial tuning parameter: "))
-  checkNumeric <- function(x) {
-    is.numeric(x) & !is.na(x)
+}
+
+exploreShape <- function(x,estMethod,tuning,twoAtATime){
+  
+  if(estMethod == 'hist'){
+    if(twoAtATime){
+      if(tuning == ''){
+        hist(x)
+        if (gmemory >= 0) {
+          hist(x,breaks=gmemory,col = "red",add=T)
+        }
+      }else{
+        plot(hist(x,breaks=tuning))
+        if (gmemory >= 0) {
+          hist(x,breaks=gmemory,col = "red", add=T)
+        }
+        gmemory <<- tuning
+      }
+    }else{
+      if(tuning == ''){
+        hist(x)
+      }else{
+        hist(x,breaks=tuning)
+        gmemory <<- tuning
+      }
+    }
+  }else if(estMethod == 'density'){
+    if(twoAtATime){
+      if(tuning == ''){
+        plot(density(x))
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
+      }else{
+        plot(density(x,bw=tuning))
+        if (gmemory >= 0) {
+          lines(density(x,bw=gmemory),col = "red")
+        }
+        gmemory <<- tuning
+      }
+    }else{
+      plot(density(x,bw=tuning))
+      gmemory <<- tuning
+    }
+  }else{
+    print('Error: Was not given a valid Method name.\n')
+    return(0)
   }
-  while (!checkNumeric(tuning)) {
-    tuning<-as.integer(readline(prompt="Enter your initial NUMERICAL tuning parameter: "))
-  }
-  twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
-  while (twot != "t" & twot != "f" & twot != "T" & twot != "F") {
-    twot<-readline(prompt="Superimpose graphs onto previous ones? (T or F): ")
-  }
-  if (twot == "t") {
-    twot <- T
-  }
-  if (twot == "f") {
-    twot <- F
-  }
-  #exploreShape(Nile,estMethod,tuning,twoAtATime)
+  
   while(choicefour){
-    #exploreShape(Nile,'hist','',F) #testing purpose
-    exploreShape(dataset,estMethod,tuning,twot)
-    cat("Please select one of the four options.\n")
-    cat("1. Give a new value of the tuning parameter.\n")
-    cat("2. Zoom in/out.\n")
-    cat("3. Run an animation of tuning parameters.\n")
-    cat("4. Quit.\n")
+    newShape(x,estMethod,tuning,twoAtATime)
+    print("Please select one of the four options.\n")
+    print("1. Give a new value of the tuning parameter.\n")
+    print("2. Zoom in/out.\n")
+    print("3. Run an animation of tuning parameters.\n")
+    print("4. Quit.\n")
     selectOption <- readline(prompt="Enter a number and press Enter: ")
     if(selectOption == 1){
       tuning <- as.integer(readline(prompt = "Enter a new value of the tuning parameter:"))
@@ -184,27 +202,27 @@ while(1){
       if(zoom == 'in'){
         zoomparam <- 10
         if(length(dataset) < zoomparam){
-          cat("You can't zoom in anymore.\n")
+          print("You can't zoom in anymore.\n")
         }else{
-          cat("Zooming in...\n")
+          print("Zooming in...\n")
           dataset = dataset[zoomparam:(length(dataset)-zoomparam)]
         }
       }else if(zoom == 'out'){
-        cat("Zooming out...\n")
+        print("Zooming out...\n")
         dataset = ogdata
       }
     }else if(selectOption == 3){
       #animation
       animate(dataset,estMethod)
     }else if(selectOption == 4){
-      cat("Quit\n")
+      print("Quit\n")
       break
     }
   }
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
   #returns a vector of integers
-  cat('Save some of your tuning parameters!(5 max)\n')
+  print('Save some of your tuning parameters!(5 max)\n')
   userparam = uservector()
   
   #Create the s3 object that we'll use in the next part
@@ -215,5 +233,4 @@ while(1){
   while(choicepspe){
     break
   }
-  break
 }
