@@ -29,20 +29,20 @@ plot.densEst <- function(x){
       if(x$two){
         plot(hist(x$data,breaks=tune))
         lines(hist(x$data,breaks=gmemory),col = "red")
-        gmemory = tune
+        gmemory <<- tune
       }else{
         plot(hist(x,breaks=tuning))
-        gmemory = tune
+        gmemory <<- tune
       }
       readline(prompt = "Hit enter to view next Plot.")
     }else if(x$method == 'density'){
       if(x$two){
         plot(density(x$data,bw=tune))
         lines(density(x$data,bw=gmemory),col = "red")
-        gmemory = tune
+        gmemory <<- tune
       }else{
         plot(density(x$data,bw=tune))
-        gmemory = tune
+        gmemory <<- tune
       }
       readline(prompt = "Hit enter to view next Plot.")
     }else{
@@ -64,14 +64,14 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
       }else{
         plot(hist(x,breaks=tuning))
         lines(hist(x,breaks=gmemory),col = "red")
-        gmemory = tuning
+        gmemory <<- tuning
       }
     }else{
       if(tuning == ''){
         plot(hist(x))
       }else{
         plot(hist(x,breaks=tuning))
-        gmemory = tuning
+        gmemory <<- tuning
       }
     }
   }else if(estMethod == 'density'){
@@ -82,11 +82,11 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
       }else{
         plot(density(x,bw=tuning))
         lines(density(x,bw=gmemory),col = "red")
-        gmemory = tuning
+        gmemory <<- tuning
       }
     }else{
       plot(density(x,bw=tuning))
-      gmemory = tuning
+      gmemory <<- tuning
     }
   }else{
     cat('Error: Was not given a valid Method name.\n')
