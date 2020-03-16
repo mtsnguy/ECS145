@@ -141,52 +141,7 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
 }
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
-  
-  if(estMethod == 'hist'){
-    if(twoAtATime){
-      if(tuning == ''){
-        hist(x)
-        if (gmemory >= 0) {
-          hist(x,breaks=gmemory,col = "red",add=T)
-        }
-      }else{
-        plot(hist(x,breaks=tuning))
-        if (gmemory >= 0) {
-          hist(x,breaks=gmemory,col = "red", add=T)
-        }
-        gmemory <<- tuning
-      }
-    }else{
-      if(tuning == ''){
-        hist(x)
-      }else{
-        hist(x,breaks=tuning)
-        gmemory <<- tuning
-      }
-    }
-  }else if(estMethod == 'density'){
-    if(twoAtATime){
-      if(tuning == ''){
-        plot(density(x))
-        if (gmemory >= 0) {
-          lines(density(x,bw=gmemory),col = "red")
-        }
-      }else{
-        plot(density(x,bw=tuning))
-        if (gmemory >= 0) {
-          lines(density(x,bw=gmemory),col = "red")
-        }
-        gmemory <<- tuning
-      }
-    }else{
-      plot(density(x,bw=tuning))
-      gmemory <<- tuning
-    }
-  }else{
-    print('Error: Was not given a valid Method name.\n')
-    return(0)
-  }
-  
+  newShape(x, estMethod, tuning, twoAtATime)
   while(choicefour){
     newShape(x,estMethod,tuning,twoAtATime)
     print("Please select one of the four options.\n")
