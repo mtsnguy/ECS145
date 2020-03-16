@@ -31,6 +31,7 @@ exploreS3 <- function(x,estMethod,tuningparams,twoAtATime){
 }
 print.densEst <- function(x){
   cat(x$data,"\n")
+  cat(x$tuning,"\n")
 }
 plot.densEst <- function(x){
   for (tune in x$tuning){
