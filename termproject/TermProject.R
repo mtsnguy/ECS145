@@ -13,14 +13,55 @@
   }
 s
 
-library(animate)
 choicefour <- T
 choicetune <- T
 choicepspe <- T
 gmemory <- 1
+
 #for zoom out
 ogdata <- Nile
+
 dataset <- Nile
+
+#functions below are for the S3 object , will have functions plot,summary and print
+exploreS3 <- function(x,estMethod,tuningparams,twoAtATime){
+  s <- list(data=x,method=estMethod,tuning=tuningparams,two=twoAtATime)
+  class(s) <- "densEst"
+  return (s)
+}
+print.densEst <- function(x){
+  cat(x$data,"\n")
+}
+plot.densEst <- function(x){
+  for (tune in x$tuning){
+    if(x$method == 'hist'){
+      if(x$two){
+        plot(hist(x$data,breaks=tune))
+        lines(hist(x$data,breaks=gmemory),col = "red")
+        gmemory = tune
+      }else{
+        plot(hist(x,breaks=tuning))
+        gmemory = tune
+      }
+      readline(prompt = "Hit enter to view next Plot.")
+    }else if(x$method == 'density'){
+      if(x$two){
+        plot(density(x$data,bw=tune))
+        lines(density(x$data,bw=gmemory),col = "red")
+        gmemory = tune
+      }else{
+        plot(density(x$data,bw=tune))
+        gmemory = tune
+      }
+      readline(prompt = "Hit enter to view next Plot.")
+    }else{
+      cat('Error: Was not given a valid Method name.\n')
+      break
+    }
+  }
+}
+test <- exploreS3(ogdata,'hist',gu,T)
+plot(test)
 
 exploreShape <- function(x,estMethod,tuning,twoAtATime){
   if(estMethod == 'hist'){
@@ -75,9 +116,9 @@ uservector <- function(){
   }
   return (as.integer(myvec))
 }
-
 animate <- function(x,estMethod){
   ki <- 1
+  cat("Running animation...")
   while(1){
     if(estMethod == 'hist'){
       hist(x,breaks=ki)
@@ -135,14 +176,17 @@ while(1){
   #after user selects 'Quit'. Get user's tuning parameters
   #save user selected parameters in memory and then
   #returns a vector of integers
-  cat('Save your tuning parameters!\n')
+  cat('Save some of your tuning parameters!(5 max)\n')
   userparam = uservector()
   
-  break
+  #Create the s3 object that we'll use in the next part
+  s3obj <- exploreS3(ogdata,estMethod,userparam,twot)
+  
   #loop again so user can select cat,summary or plot or exit
-  #end program or start again
+  #give option to end program or start again
   while(choicepspe){
-    
+    break
   }
+  break
 }
 
