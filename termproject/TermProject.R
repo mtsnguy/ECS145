@@ -32,26 +32,26 @@ plot.densEst <- function(x){
     if(x$method == 'hist'){
       if(x$two){
         p1 <- hist(x$data,breaks=tune,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10, main="Histogram")
+        plot(p1, col="blue", angle = 135,density=10, main="Histogram of x")
         if (gmemory >= 0) {
           p2 <- hist(x$data,breaks=gmemory,plot=FALSE)
           plot(p2, col="red", add=T, angle = 45,density=10)
         }
         gmemory <<- tune
       }else{
-        plot(hist(x,breaks=tuning), main="Histogram")
+        plot(hist(x,breaks=tuning), main="Histogram of x")
         gmemory <<- tune
       }
       readline(prompt = "Hit enter to view next Plot.")
     }else if(x$method == 'density'){
       if(x$two){
-        plot(density(x$data,bw=tune), main="Density")
+        plot(density(x$data,bw=tune), main="Density of x")
         if (gmemory >= 0) {
           lines(density(x$data,bw=gmemory),col = "red")
         }
         gmemory <<- tune
       }else{
-        plot(density(x$data,bw=tune), main="Density")
+        plot(density(x$data,bw=tune), main="Density of x")
         gmemory <<- tune
       }
       readline(prompt = "Hit enter to view next Plot.")
@@ -100,14 +100,14 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
     if(twoAtATime){
       if(tuning == ''){
         p1 <- hist(x,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10, main="Histogram")
+        plot(p1, col="blue", angle = 135,density=10, main="Histogram of x")
         if (gmemory >= 0) {
           p2 <- hist(x,breaks=gmemory,plot=FALSE)
           plot(p2, col="red", add=T, angle = 45, density=10)
         }
       }else{
         p1 <- hist(x,breaks=tuning,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10, main="Histogram")
+        plot(p1, col="blue", angle = 135,density=10, main="Histogram of x")
         if (gmemory >= 0) {
           p2 <- hist(x,breaks=gmemory,plot=FALSE)
           plot(p2, add=T, col="red", angle=45,density=10)
@@ -117,29 +117,29 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
     }else{
       if(tuning == ''){
         p1 <- hist(x,breaks=tuning,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10, main="Histogram")
+        plot(p1, col="blue", angle = 135,density=10, main="Histogram of x")
       }else{
         p1 <- hist(x,breaks=tuning,plot=FALSE)
-        plot(p1, col="blue", angle = 135,density=10, main="Histogram")
+        plot(p1, col="blue", angle = 135,density=10, main="Histogram of x")
         gmemory <<- tuning
       }
     }
   }else if(estMethod == 'density'){
     if(twoAtATime){
       if(tuning == ''){
-        plot(density(x), main="Density")
+        plot(density(x), main="Density of x")
         if (gmemory >= 0) {
           lines(density(x,bw=gmemory),col = "red")
         }
       }else{
-        plot(density(x,bw=tuning), main="Density")
+        plot(density(x,bw=tuning), main="Density of x")
         if (gmemory >= 0) {
           lines(density(x,bw=gmemory),col = "red")
         }
         gmemory <<- tuning
       }
     }else{
-      plot(density(x,bw=tuning), main="Density")
+      plot(density(x,bw=tuning), main="Density of x")
       gmemory <<- tuning
     }
   }else{
