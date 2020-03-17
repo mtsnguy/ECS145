@@ -94,7 +94,6 @@ animate <- function(x,estMethod){
 }
 
 newShape <- function(x,estMethod,tuning,twoAtATime){
-  
   if(estMethod == 'hist'){
     if(twoAtATime){
       if(tuning == ''){
@@ -189,6 +188,6 @@ exploreShape <- function(x,estMethod,tuning,twoAtATime){
   userparam = uservector()
   
   #Create the s3 object that we'll use in the next part
-  s3obj <- exploreS3(ogdata,estMethod,userparam,twot) 
+  s3obj <- exploreS3(ogdata,estMethod,userparam,twoAtATime) 
   return(s3obj)
 }
