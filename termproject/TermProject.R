@@ -4,8 +4,6 @@
 #tuning: The intial value of either breaks or bw.
 #twoAtATime: If TRUE, always display the current graph superimposed on the previous one, to aid comparison.
 choicefour <- T
-choicetune <- T
-choicepspe <- T
 gmemory <- -1
 
 #for zoom out
@@ -148,7 +146,7 @@ newShape <- function(x,estMethod,tuning,twoAtATime){
   }
 }
 
-exploreShape <- function(x,estMethod,tuning,twoAtATime){
+  exploreShape <- function(x,estMethod,tuning,twoAtATime){
   dataset <<- sort(x, decreasing=FALSE)
   ogdata <<- sort(x, decreasing=FALSE)
   while(choicefour){
