@@ -79,6 +79,26 @@ Additionally, we included zooming functionality. This was done by first ordering
 
 
 
+\section{Discussion}
+
+\subsection{Initial User Interface}
+Initially we had it such that the user was immediately prompted whenever the file was run with a text prompt, and a call to exploreShape was done automatically for the user. However, this did not fit the parameters of the project, thus the entire code and prompt was put into the exploreShape function. After this was done, the user would then have to call the exploreShape function to begin graphing and being prompted. We decided that as users we would probably enjoy being prompted without the explicit call, as it can be confusing unless the user was familiar with the exploreShape function, but for the sake of the project we had the user call exploreShape as shown in the project prompt.
+
+\subsection{Assumptions and limitations}
+ The animation feature of the project only animates up to a bw / break of 100. We could possibly make it so users would be able to set their limit. Whenever we finish one loop of the main function, we make a call to the graphing function. As a result, every time that the loop is run through, ie a function is done like zooming, changing the tuning parameter, or running the animation, then it begins again and a graph is displayed based on the tuning parameters in memory. This led to every time the animation was run or the graph was zoomed in or out, the graph was superimposed onto itself.
+
+\subsection{Scope and Style}
+Throughout the coding process, we tried to provide as many informative comments about each method or variable that we used without being too verbose or ambiguous. We wrote many of the features into separate functions to keep the code clean and legible. 
+
+\subsection{Edge Cases}
+
+\subsection{Optimizations and Efficiency}
+
+
+\subsection{Personal Reflection}
+This term project has provided us with an interesting opportunity to create an R package that could be used by someone who was interested in plotting their datasets with different tuning parameters. This project has taught us a lot in the process of team working to building a clean and easy to use end product. 
+
+If there was something we would do differently for next time, we would probably try to keep the superposition of the previous graph if the animation was played or the graph was zoomed in. Additionally we thought possibly we could add a superposition as the animation played as a possible addition.
 
 \section{Individual Contributions}
 
@@ -86,7 +106,7 @@ Additionally, we included zooming functionality. This was done by first ordering
 Gavin worked on debugging the code when errors arose, as well as brainstorming the implementation of various aspects of the code and writing the Graphing section of the report.
 
 \subsection{Jeremy}
-Initially the code was run automatically with the file, and not with a function call to exploreShape, but Jeremy put the code within the exploreShape function such that the loop and prompts went within that itself. Thus, the graphing occurred only when the user prompts it with the function exploreShape with the correct arguments. Jeremy helped with testing of the project code, and pointing out issues in output. Furthermore, Jeremy helped with outlining and organization of the report, writing the introduction as well as adding in the images of output graphs.
+Initially the code was run automatically with the file, and not with a function call to exploreShape, but Jeremy put the code within the exploreShape function such that the loop and prompts went within that itself. Thus, the graphing occurred only when the user prompts it with the function exploreShape with the correct arguments. Jeremy helped with testing of the project code, and pointing out issues in output. Furthermore, Jeremy helped with outlining and organization of the report, writing the introduction as well as adding in the images of output graphs. Jeremy also added the appendix with the call to the code file in LaTex.
 
 \subsection{Shayan}
 Shayan mainly focused on improving the presentability of the project. One of the main areas of focus was making the twoAtATime
@@ -98,25 +118,6 @@ quality of life improvements like handling bad user input and allowing users to 
 
 \subsection{Michael}
 Michael started off by creating comments and empty functions to get a general idea of which direction to take the Term Project. Michael created all necessary global variables,functions and classes that would be used later in development. Michael coded the functionalities for zoom in/out, plot animations, s3 class densEst and functions. The team would go on to work on top of Michael's code to improve and adjust the project. Michael also helped in adding information to the report.
-
-\section{Discussion}
-\subsection{Assumptions and limitations}
-Our project assumes that the data to be used is the Nile data set provided by the R package. We can also make it so the user would have to provide their own data set. 
-The animation feature of the project only animates up to a bw / break of 100. We could possibly make it so users would be able to set their limit. 
-
-\subsection{Scope and Style}
-Throughout the coding process, we tried to provide as many informative comments about each method or variable that we used without being too verbose or ambiguous. We wrote many of the features into separate functions to keep the code clean and legible. 
-
-\subsection{Edge Cases}
-
-\subsection{Optimizations and Efficiency}
-
-
-\subsection{Personal Reflection}
-This term project has provided us with an interesting opportunity to create an R package that could be used by someone who was interested in plotting their datasets with different tuning parameters. 
-This project has taught us a lot in the process of team working to building a clean and easy to use end product. 
-
-If there was something we would do differently for next time..
 
 \newpage
 
